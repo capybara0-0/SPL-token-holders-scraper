@@ -1,25 +1,29 @@
 import { address } from "@solana/kit";
 import { CONNECTION } from "./connection";
-import { TARGET_TOKEN_MINT_ADDRESS, TEST_ADDRESS } from "../constants/constant";
+import { TARGET_TOKEN_MINT_ADDRESS } from "../constants/constant";
 
-const OWNER_ADDRESS = address(TEST_ADDRESS);
 const SPL_TOKEN_MINT_ADDRESS = address(TARGET_TOKEN_MINT_ADDRESS);
-
 const ACCOUNT_FILTERS = { mint: SPL_TOKEN_MINT_ADDRESS };
 
-const CONFIG = {
-  dataSlice: { offset: 0, length: 32 },
-  encoding: "base64",
-};
+export async function fetchTokenAccountsByOwner(owner_address: string) {
+  const OWNER_ADDRESS = address(owner_address);
 
-export async function fetchTokenAccountsByOwner() {
   try {
-    const data = await CONNECTION.getTokenAccountsByOwner(
+    const response = await CONNECTION.getTokenAccountsByOwner(
       OWNER_ADDRESS,
       ACCOUNT_FILTERS,
-      CONFIG
+      { encoding: "jsonParsed" }
     ).send();
-    console.log(data);
+    console.log("owner address: ", OWNER_ADDRESS);
+    console.log("associated token address: ", response.value[0].pubkey);
+    console.log(
+      "token amount: ",
+      response.value[0].account.data.parsed.info.tokenAmount.uiAmount
+    );
+    console.log(
+      "token account state: ",
+      response.value[0].account.data.parsed.info.state
+    );
   } catch (error) {
     console.error("Error in fetchTokenAccountsByOwner", error);
   }
