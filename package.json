@@ -14,13 +14,16 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^22.13.5",
+    "@types/sqlite3": "^3.1.11",
     "rimraf": "^6.0.1",
+    "sqlite": "^5.1.1",
     "typescript": "^5.8.2"
   },
   "dependencies": {
     "@solana/errors": "^2.1.0",
     "@solana/kit": "^2.1.0",
     "@solana/spl-token": "^0.4.12",
-    "p-limit": "^6.2.0"
+    "p-limit": "^6.2.0",
+    "sqlite3": "^5.1.7"
   }
 }
