@@ -8,3 +8,9 @@ export interface TokenAccountInfo {
 export interface ErrorResponse {
   error: string;
 }
+
+export interface streamedDataFromDatabase {
+  id: number;
+  publicKey: string;
+  status: string;
+}
