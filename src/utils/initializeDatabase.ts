@@ -1,6 +1,5 @@
 import * as fs from "fs";
 import * as path from "path";
-
 import { open } from "sqlite";
 import sqlite3 from "sqlite3";
 
