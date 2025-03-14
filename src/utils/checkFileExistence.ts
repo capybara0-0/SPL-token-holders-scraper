@@ -1,13 +1,17 @@
 import path from "path";
 import * as fs from "fs/promises";
+import { TEXT_FILE_NAME } from "../constants/constant.js";
 
-export async function checkFileExistence(fileName: string): Promise<boolean> {
+export async function checkFileExistence(
+  fileName: string = TEXT_FILE_NAME
+): Promise<boolean> {
   console.log(`Starting file existence check...`);
 
   const filePath = path.join(process.cwd(), fileName);
 
   try {
     await fs.access(filePath, fs.constants.F_OK);
+    console.log("File exists.");
     return true;
   } catch (error) {
     const errnoException = error as NodeJS.ErrnoException;
@@ -30,6 +34,6 @@ export async function checkFileExistence(fileName: string): Promise<boolean> {
         );
         break;
     }
-    process.exit(1);
+    return false;
   }
 }

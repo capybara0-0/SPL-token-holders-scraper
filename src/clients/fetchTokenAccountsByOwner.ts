@@ -1,7 +1,7 @@
 import { address } from "@solana/kit";
-import { CONNECTION } from "./connection";
-import { TARGET_TOKEN_MINT_ADDRESS } from "../constants/constant";
-import { ErrorResponse, TokenAccountInfo } from "../models/interfaces";
+import { CONNECTION } from "./connection.js";
+import { TARGET_TOKEN_MINT_ADDRESS } from "../constants/constant.js";
+import { ErrorResponse, TokenAccountInfo } from "../models/interfaces.js";
 
 const SPL_TOKEN_MINT_ADDRESS = address(TARGET_TOKEN_MINT_ADDRESS);
 const ACCOUNT_FILTERS = { mint: SPL_TOKEN_MINT_ADDRESS };

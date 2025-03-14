@@ -23,6 +23,8 @@
     "@solana/errors": "^2.1.0",
     "@solana/kit": "^2.1.0",
     "@solana/spl-token": "^0.4.12",
+    "@types/better-sqlite3": "^7.6.12",
+    "better-sqlite3": "^11.8.1",
     "p-limit": "^6.2.0",
     "sqlite3": "^5.1.7"
   }

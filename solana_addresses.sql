@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS solana_addresses (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    publicKey VARCHAR(42) NOT NULL,
+    publicKey VARCHAR(44) NOT NULL,
     status VARCHAR(7) NOT NULL CHECK (status IN ('pending', 'success', 'failed')) DEFAULT 'pending'
 );
 

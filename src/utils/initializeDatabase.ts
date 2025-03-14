@@ -15,7 +15,7 @@ export async function initializeDatabase(
   try {
     if (!DB_FILE_EXISTS && !SCHEMA_FILE_EXISTS) {
       console.error(
-        "Database and Schema file does not exist, exiting the program.\n(Atleast 1 is required)"
+        "Database and Schema file does not exist, exiting the program.\n(Atleast one of the file is required)"
       );
       process.exit(1);
     }

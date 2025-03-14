@@ -1,7 +1,5 @@
-import Database from "better-sqlite3";
+import { db } from "../constants/constant.js";
 import { streamedDataFromDatabase } from "../models/interfaces.js";
-
-const db = new Database("SOLANA_ADDRESSES.DB", { verbose: console.log });
 
 export async function* streamAddressesFromDatabase(
   status: string,
