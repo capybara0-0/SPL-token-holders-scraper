@@ -1,22 +1,18 @@
 import * as fs from "fs";
 import * as readline from "readline";
-import * as path from "path";
 import sqlite3 from "sqlite3";
 import { open } from "sqlite";
 import { insertAddressIntoDatabase } from "./insertAddressIntoDatabase.js";
 import { validateAddress } from "./helpers.js";
-import { TEXT_FILE_NAME } from "../constants/constant.js";
+import { DB_FILE_PATH, TEXT_FILE_PATH } from "../constants/constant.js";
 
-export async function streamAddressesFromFile(
-  fileName: string = TEXT_FILE_NAME
-): Promise<boolean> {
+export async function streamAddressesFromFile(): Promise<boolean> {
   try {
-    const filePath = path.join(process.cwd(), fileName);
-    const fileStream = fs.createReadStream(filePath);
-    const DB_NAME = path.join(process.cwd(), "SOLANA_ADDRESSES.DB");
-    const batchLimit = 10000;
+    const fileStream = fs.createReadStream(TEXT_FILE_PATH);
+
+    const batchLimit = 1000;
     const db = await open({
-      filename: DB_NAME,
+      filename: DB_FILE_PATH,
       driver: sqlite3.Database,
     });
     const rl = readline.createInterface({

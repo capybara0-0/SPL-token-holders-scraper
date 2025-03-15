@@ -1,5 +1,7 @@
-import { db } from "../constants/constant.js";
+import Database from "better-sqlite3";
+import { DB_FILE_NAME } from "../constants/constant.js";
 
+const db = new Database(DB_FILE_NAME);
 export function updateDataBaseStatus(
   id: number,
   newStatus: "success" | "failed"

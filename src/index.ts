@@ -1,7 +1,7 @@
 import { fetchTokenAccountsByOwner } from "./clients/fetchTokenAccountsByOwner.js";
 import { streamAddressesFromDatabase } from "./utils/streamAddressesFromDatabase.js";
 import { updateDataBaseStatus } from "./utils/updateDatabaseStatus.js";
-import { db, TEXT_FILE_NAME } from "./constants/constant.js";
+import { TEXT_FILE_NAME } from "./constants/constant.js";
 import { checkFileExistence } from "./utils/checkFileExistence.js";
 import { initializeDatabase } from "./utils/initializeDatabase.js";
 import { streamAddressesFromFile } from "./utils/streamAddressesFromFile.js";
@@ -27,11 +27,8 @@ import { streamAddressesFromFile } from "./utils/streamAddressesFromFile.js";
 async function main() {
   try {
     const startTime = performance.now();
-    const fileExists = await checkFileExistence(TEXT_FILE_NAME);
-    const dbInitialized = await initializeDatabase(
-      "SOLANA_ADDRESSES.DB",
-      "solana_addresses.sql"
-    );
+    const fileExists = await checkFileExistence();
+    const dbInitialized = await initializeDatabase();
 
     if (!fileExists || !dbInitialized) return;
     const addressStreamed = await streamAddressesFromFile();

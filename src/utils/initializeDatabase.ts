@@ -1,15 +1,11 @@
 import * as fs from "fs";
-import * as path from "path";
 import { open } from "sqlite";
 import sqlite3 from "sqlite3";
+import { DB_FILE_PATH, SCHEMA_FILE_PATH } from "../constants/constant.js";
 
-export async function initializeDatabase(
-  fileName: string,
-  schemaFilePath: string
-): Promise<boolean> {
-  const FILE_NAME = path.join(process.cwd(), fileName);
-  const SCHEMA_FILE_PATH = path.join(process.cwd(), schemaFilePath);
-  const DB_FILE_EXISTS = fs.existsSync(FILE_NAME);
+export async function initializeDatabase(): Promise<boolean> {
+  const DB_FILE_EXISTS = fs.existsSync(DB_FILE_PATH);
+
   const SCHEMA_FILE_EXISTS = fs.existsSync(SCHEMA_FILE_PATH);
 
   try {
@@ -21,7 +17,7 @@ export async function initializeDatabase(
     }
 
     const db = await open({
-      filename: FILE_NAME,
+      filename: DB_FILE_PATH,
       driver: sqlite3.Database,
     });
 
