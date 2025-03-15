@@ -14,3 +14,10 @@ export interface streamedDataFromDatabase {
   publicKey: string;
   status: string;
 }
+
+export interface fetchedDataFromApi {
+  ownerAddress: string;
+  associatedTokenAccount: string;
+  tokenAmount: number;
+  tokenAccountState: string;
+}

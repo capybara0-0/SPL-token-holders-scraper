@@ -1,8 +1,8 @@
 import ExcelJS from "exceljs";
 import path from "path";
-import { XLSX_FILE_NAME } from "../constants/constant.js";
+import { TARGET_TOKEN_MINT_ADDRESS } from "../constants/constant.js";
 
-export async function createExcelSheet() {
+export async function createExcelSheet(): Promise<boolean> {
   const workbook = new ExcelJS.Workbook();
   const worksheet = workbook.addWorksheet();
 
@@ -21,7 +21,10 @@ export async function createExcelSheet() {
   headerRow.font = { bold: true };
   headerRow.alignment = { vertical: "middle", horizontal: "center" };
 
-  const filePath = path.join(process.cwd(), XLSX_FILE_NAME);
+  const filePath = path.join(
+    process.cwd(),
+    `${TARGET_TOKEN_MINT_ADDRESS}.xlsx`
+  );
 
   try {
     await workbook.xlsx.writeFile(filePath);
