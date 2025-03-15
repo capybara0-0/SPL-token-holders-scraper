@@ -13,9 +13,9 @@ export const SPL_TOKEN_PROGRAM_ID: string =
 
 export const TEXT_FILE_NAME: string = "addresses.txt";
 export const DB_FILE_NAME: string = "solana_addresses.db";
+export const XLSX_FILE_NAME: string = "output.xlsx";
 
 // FOR DEVELOPERS
-
 export const TEXT_FILE_PATH = path.join(process.cwd(), TEXT_FILE_NAME);
 export const DB_FILE_PATH = path.join(process.cwd(), DB_FILE_NAME);
 export const SCHEMA_FILE_PATH = path.join(

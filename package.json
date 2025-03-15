@@ -25,6 +25,7 @@
     "@solana/spl-token": "^0.4.12",
     "@types/better-sqlite3": "^7.6.12",
     "better-sqlite3": "^11.8.1",
+    "exceljs": "^4.4.0",
     "p-limit": "^6.2.0",
     "sqlite3": "^5.1.7"
   }
