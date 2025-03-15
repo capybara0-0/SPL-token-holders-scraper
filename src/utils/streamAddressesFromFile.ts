@@ -10,7 +10,7 @@ export async function streamAddressesFromFile(): Promise<boolean> {
   try {
     const fileStream = fs.createReadStream(TEXT_FILE_PATH);
 
-    const batchLimit = 1000;
+    const batchLimit = 10;
     const db = await open({
       filename: DB_FILE_PATH,
       driver: sqlite3.Database,
@@ -29,7 +29,7 @@ export async function streamAddressesFromFile(): Promise<boolean> {
         batchedAddresses.push(address);
         if (batchedAddresses.length >= batchLimit) {
           await insertAddressIntoDatabase(batchedAddresses, db).then(() => {
-            console.log("batch of address inserted.");
+            console.log("A batch of addresses inserted to database.");
             batchedAddresses = [];
           });
         }
@@ -40,16 +40,13 @@ export async function streamAddressesFromFile(): Promise<boolean> {
 
     if (batchedAddresses.length > 0) {
       await insertAddressIntoDatabase(batchedAddresses, db).then(() => {
-        console.log("Adding final batch");
+        console.log("Adding final batch of addresses.");
       });
     }
-    console.log("total invalid address count: ", invalidAddressCount);
+    console.log("Total invalid address count: ", invalidAddressCount);
     return true;
   } catch (error) {
-    console.error(
-      "Error while streaming addresses from textfile to database: ",
-      error
-    );
+    console.error("Error in streadAddressesFromFile: ", error);
     return false;
   }
 }

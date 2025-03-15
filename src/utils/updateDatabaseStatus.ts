@@ -1,11 +1,11 @@
 import Database from "better-sqlite3";
 import { DB_FILE_NAME } from "../constants/constant.js";
 
-const db = new Database(DB_FILE_NAME);
 export function updateDataBaseStatus(
   id: number,
   newStatus: "success" | "failed"
 ) {
+  const db = new Database(DB_FILE_NAME);
   try {
     const sqlStatement = db.prepare(
       `UPDATE solana_addresses SET status = ? WHERE id = ?`

@@ -5,7 +5,6 @@ import { DB_FILE_PATH, SCHEMA_FILE_PATH } from "../constants/constant.js";
 
 export async function initializeDatabase(): Promise<boolean> {
   const DB_FILE_EXISTS = fs.existsSync(DB_FILE_PATH);
-
   const SCHEMA_FILE_EXISTS = fs.existsSync(SCHEMA_FILE_PATH);
 
   try {
@@ -22,21 +21,33 @@ export async function initializeDatabase(): Promise<boolean> {
     });
 
     if (DB_FILE_EXISTS) {
-      await db.exec("DELETE FROM solana_addresses");
-      await db.exec(
-        "DELETE FROM sqlite_sequence WHERE name = 'solana_addresses'"
+      const tableExists = await db.get(
+        "SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'solana_addresses'"
       );
-      console.log(`DataBase already exists. Wiping old data.`);
+      if (tableExists) {
+        await db.exec("DELETE FROM solana_addresses");
+        await db.exec(
+          "DELETE FROM sqlite_sequence WHERE name = 'solana_addresses'"
+        );
+        console.log(`Database already exists. Cleaned old records`);
+      } else {
+        const schemaSQL = fs.readFileSync(SCHEMA_FILE_PATH, "utf-8");
+        console.log(
+          `Database exists but does not contain the "solana_addresses" table`
+        );
+        await db.exec(schemaSQL);
+        console.log(`Schema executed successfully.`);
+      }
+
       await db.close();
       return true;
     } else {
       const schemaSQL = fs.readFileSync(SCHEMA_FILE_PATH, "utf-8");
-      console.log("Schema file read sucessfully");
+      console.log("Schema file read sucessfully.");
 
       await db.exec(schemaSQL);
-      console.log("Schema executed successfully");
+      console.log("Schema executed successfully.");
 
-      await db.close();
       return true;
     }
   } catch (error) {

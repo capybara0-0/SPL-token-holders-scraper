@@ -2,11 +2,9 @@ import * as fs from "fs/promises";
 import { TEXT_FILE_NAME, TEXT_FILE_PATH } from "../constants/constant.js";
 
 export async function checkFileExistence(): Promise<boolean> {
-  console.log(`Starting file existence check...`);
-
   try {
     await fs.access(TEXT_FILE_PATH, fs.constants.F_OK);
-    console.log("File exists.");
+    console.log(`${TEXT_FILE_NAME} confirmed.`);
     return true;
   } catch (error) {
     const errnoException = error as NodeJS.ErrnoException;
