@@ -1,16 +1,9 @@
 import { address } from "@solana/kit";
 import { CONNECTION } from "./connection.js";
 import { TARGET_TOKEN_MINT_ADDRESS } from "../constants/constant.js";
-import {
-  ErrorResponse,
-  fetchedDataFromApi,
-  TokenAccountInfo,
-} from "../models/interfaces.js";
 
 const SPL_TOKEN_MINT_ADDRESS = address(TARGET_TOKEN_MINT_ADDRESS);
 const ACCOUNT_FILTERS = { mint: SPL_TOKEN_MINT_ADDRESS };
-
-type FetchTokenAccountsByOwnerResponse = fetchedDataFromApi;
 
 export async function fetchTokenAccountsByOwner(owner_address: string) {
   const OWNER_ADDRESS = address(owner_address);

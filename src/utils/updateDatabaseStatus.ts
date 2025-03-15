@@ -1,11 +1,8 @@
-import Database from "better-sqlite3";
-import { DB_FILE_NAME } from "../constants/constant.js";
+// import Database from "better-sqlite3";
+// import { DB_FILE_NAME } from "../constants/constant.js";
+import { db } from "./streamAddressesFromDatabase.js";
 
-export function updateDataBaseStatus(
-  id: number,
-  newStatus: "success" | "failed"
-) {
-  const db = new Database(DB_FILE_NAME);
+export function updateDataBaseStatus(id: number, newStatus: string) {
   try {
     const sqlStatement = db.prepare(
       `UPDATE solana_addresses SET status = ? WHERE id = ?`

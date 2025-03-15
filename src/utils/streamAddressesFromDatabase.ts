@@ -3,6 +3,7 @@ import { streamedDataFromDatabase } from "../models/interfaces.js";
 import { DB_FILE_NAME } from "../constants/constant.js";
 
 export const db = new Database(DB_FILE_NAME);
+
 export async function* streamAddressesFromDatabase(
   status: string,
   batchSize: number = 5

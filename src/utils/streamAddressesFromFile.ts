@@ -44,6 +44,7 @@ export async function streamAddressesFromFile(): Promise<boolean> {
       });
     }
     console.log("Total invalid address count: ", invalidAddressCount);
+    db.close();
     return true;
   } catch (error) {
     console.error("Error in streadAddressesFromFile: ", error);

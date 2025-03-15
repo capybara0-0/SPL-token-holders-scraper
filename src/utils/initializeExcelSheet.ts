@@ -22,7 +22,7 @@ export async function createExcelSheet(): Promise<boolean> {
       key: "associatedTokenAccount",
       width: 45,
     },
-    { header: "Token Amount", key: "tokenAmount", width: 45 },
+    { header: "Token Amount", key: "tokenAmount", width: 15 },
     { header: "Token Account State", key: "tokenAccountState", width: 15 },
   ];
 

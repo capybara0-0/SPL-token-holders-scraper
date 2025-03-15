@@ -47,11 +47,11 @@ export async function initializeDatabase(): Promise<boolean> {
 
       await db.exec(schemaSQL);
       console.log("Schema executed successfully.");
-
+      await db.close();
       return true;
     }
   } catch (error) {
-    console.error("Unknown error during initializing Database: ", error);
+    console.error("Error during initializing Database: ", error);
     return false;
   }
 }

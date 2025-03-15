@@ -22,7 +22,7 @@ export async function checkFileExistence(): Promise<boolean> {
         break;
       default:
         console.log(
-          `Error while checking file "${TEXT_FILE_NAME}": `,
+          `Error while checking file "${TEXT_FILE_NAME} existence": `,
           errnoException.message
         );
         break;

@@ -1,6 +1,7 @@
 import path from "path";
 
-export const RPC_URI: string = "";
+export const RPC_URI: string =
+  "https://solana-mainnet.g.alchemy.com/v2/YVHMLH_peQKawiY96eiqtt-ZfYB80WQO";
 
 export const TARGET_TOKEN_MINT_ADDRESS: string =
   "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v";
