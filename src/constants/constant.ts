@@ -1,8 +1,11 @@
+import * as dotenv from "dotenv";
 import path from "path";
 
-export const RPC_URI: string =
-  "https://solana-mainnet.g.alchemy.com/v2/YVHMLH_peQKawiY96eiqtt-ZfYB80WQO";
+dotenv.config({
+  path: path.join(process.cwd(), ".env"),
+});
 
+export const RPC_URI: string = `https://solana-mainnet.g.alchemy.com/v2/${process.env.API_KEY}`;
 export const TARGET_TOKEN_MINT_ADDRESS: string =
   "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v";
 

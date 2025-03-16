@@ -1,6 +1,5 @@
 import { fetchTokenAccountsByOwner } from "./clients/fetchTokenAccountsByOwner.js";
 import { streamAddressesFromDatabase } from "./utils/streamAddressesFromDatabase.js";
-import { updateDataBaseStatus } from "./utils/updateDatabaseStatus.js";
 import { checkFileExistence } from "./utils/checkFileExistence.js";
 import { initializeDatabase } from "./utils/initializeDatabase.js";
 import { streamAddressesFromFile } from "./utils/streamAddressesFromFile.js";
