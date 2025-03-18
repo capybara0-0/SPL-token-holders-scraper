@@ -4,6 +4,7 @@ import {
   TARGET_TOKEN_MINT_ADDRESS,
   XLSX_FILE_PATH,
 } from "../constants/constant.js";
+import chalk from "chalk";
 
 export async function createExcelSheet(): Promise<boolean> {
   const workbook = new ExcelJS.Workbook();
@@ -11,7 +12,11 @@ export async function createExcelSheet(): Promise<boolean> {
   const XLSX_FILE_EXISITS = fs.existsSync(XLSX_FILE_PATH);
 
   if (XLSX_FILE_EXISITS) {
-    console.log(`Excel sheet named: ${TARGET_TOKEN_MINT_ADDRESS}.xlsx exists`);
+    console.log(
+      chalk.green(
+        `Excel sheet named: ${TARGET_TOKEN_MINT_ADDRESS}.xlsx exists.`
+      )
+    );
     return true;
   }
 
@@ -33,11 +38,13 @@ export async function createExcelSheet(): Promise<boolean> {
   try {
     await workbook.xlsx.writeFile(XLSX_FILE_PATH);
     console.log(
-      `New excel file created, named ${TARGET_TOKEN_MINT_ADDRESS}.xlsx`
+      chalk.green(
+        `New excel file created, named ${TARGET_TOKEN_MINT_ADDRESS}.xlsx`
+      )
     );
     return true;
   } catch (error) {
-    console.error("Error while creating excel file: ", error);
+    console.error(chalk.red("Error while creating excel file: "), error);
     return false;
   }
 }

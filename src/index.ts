@@ -1,18 +1,18 @@
-import { fetchTokenAccountsByOwner } from "./clients/fetchTokenAccountsByOwner.js";
-import { streamAddressesFromDatabase } from "./utils/streamAddressesFromDatabase.js";
 import { checkFileExistence } from "./utils/checkFileExistence.js";
-import { initializeDatabase } from "./utils/initializeDatabase.js";
-import { streamAddressesFromFile } from "./utils/streamAddressesFromFile.js";
 import { createExcelSheet } from "./utils/initializeExcelSheet.js";
-import { insertFetchedDataIntoExcel } from "./utils/insertFetchedDataIntoExcel.js";
 import { fetchedDataFromApi } from "./models/interfaces.js";
+import { fetchTokenAccountsByOwner } from "./clients/fetchTokenAccountsByOwner.js";
+import { initializeDatabase } from "./utils/initializeDatabase.js";
+import { insertFetchedDataIntoExcel } from "./utils/insertFetchedDataIntoExcel.js";
+import { streamAddressesFromDatabase } from "./utils/streamAddressesFromDatabase.js";
+import { streamAddressesFromFile } from "./utils/streamAddressesFromFile.js";
+import chalk from "chalk";
 
 async function main() {
+  console.log(chalk.yellow(`[START] Main program started.`));
   let successFetchedData: fetchedDataFromApi[] = [];
 
   try {
-    const startTime = performance.now();
-
     // Checking requirements
     const [fileExists, dbInitialized, excelInitialized] = await Promise.all([
       checkFileExistence(),
@@ -48,15 +48,11 @@ async function main() {
     // Insert any remaining data into Excel.
     if (successFetchedData.length > 0) {
       insertFetchedDataIntoExcel(successFetchedData);
-      console.log(`Final batch added to excelsheet.`);
     }
 
-    const endTime = performance.now();
-    console.log(
-      `Total execution time: ${(endTime - startTime).toFixed(2)} ms.`
-    );
+    console.log(chalk.yellow(`[END] Main program completed.`));
   } catch (error) {
-    console.error("Error in main function", error);
+    console.error(chalk.red("Error in main function: "), error);
   }
 }
 

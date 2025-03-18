@@ -1,5 +1,4 @@
-// import Database from "better-sqlite3";
-// import { DB_FILE_NAME } from "../constants/constant.js";
+// Unused code.
 import { db } from "./streamAddressesFromDatabase.js";
 
 export function updateDataBaseStatus(id: number, newStatus: string) {

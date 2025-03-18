@@ -5,12 +5,13 @@ import { open } from "sqlite";
 import { insertAddressIntoDatabase } from "./insertAddressIntoDatabase.js";
 import { validateAddress } from "./helpers.js";
 import { DB_FILE_PATH, TEXT_FILE_PATH } from "../constants/constant.js";
+import chalk from "chalk";
 
 export async function streamAddressesFromFile(): Promise<boolean> {
   try {
     const fileStream = fs.createReadStream(TEXT_FILE_PATH);
 
-    const batchLimit = 10;
+    const batchLimit = 5;
     const db = await open({
       filename: DB_FILE_PATH,
       driver: sqlite3.Database,
@@ -29,7 +30,6 @@ export async function streamAddressesFromFile(): Promise<boolean> {
         batchedAddresses.push(address);
         if (batchedAddresses.length >= batchLimit) {
           await insertAddressIntoDatabase(batchedAddresses, db).then(() => {
-            console.log("A batch of addresses inserted to database.");
             batchedAddresses = [];
           });
         }
@@ -39,15 +39,16 @@ export async function streamAddressesFromFile(): Promise<boolean> {
     }
 
     if (batchedAddresses.length > 0) {
-      await insertAddressIntoDatabase(batchedAddresses, db).then(() => {
-        console.log("Adding final batch of addresses.");
-      });
+      await insertAddressIntoDatabase(batchedAddresses, db);
     }
-    console.log("Total invalid address count: ", invalidAddressCount);
+    console.log(
+      "Total invalid address count: ",
+      chalk.yellow(invalidAddressCount)
+    );
     db.close();
     return true;
   } catch (error) {
-    console.error("Error in streadAddressesFromFile: ", error);
+    console.error(chalk.red("Error in streadAddressesFromFile: "), error);
     return false;
   }
 }

@@ -1,11 +1,7 @@
-import * as dotenv from "dotenv";
 import path from "path";
 
-dotenv.config({
-  path: path.join(process.cwd(), ".env"),
-});
+export const RPC_URI: string = "";
 
-export const RPC_URI: string = `https://solana-mainnet.g.alchemy.com/v2/${process.env.API_KEY}`;
 export const TARGET_TOKEN_MINT_ADDRESS: string =
   "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v";
 
@@ -15,7 +11,6 @@ export const SPL_TOKEN_PROGRAM_ID: string =
 export const TEXT_FILE_NAME: string = "addresses.txt";
 export const DB_FILE_NAME: string = "solana_addresses.db";
 
-// FOR DEVELOPERS
 export const TEXT_FILE_PATH = path.join(process.cwd(), TEXT_FILE_NAME);
 export const DB_FILE_PATH = path.join(process.cwd(), DB_FILE_NAME);
 export const SCHEMA_FILE_PATH = path.join(

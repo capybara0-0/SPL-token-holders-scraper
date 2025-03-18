@@ -1,6 +1,7 @@
 import * as fs from "fs";
 import { open } from "sqlite";
 import sqlite3 from "sqlite3";
+import chalk from "chalk";
 import { DB_FILE_PATH, SCHEMA_FILE_PATH } from "../constants/constant.js";
 
 export async function initializeDatabase(): Promise<boolean> {
@@ -10,7 +11,9 @@ export async function initializeDatabase(): Promise<boolean> {
   try {
     if (!DB_FILE_EXISTS && !SCHEMA_FILE_EXISTS) {
       console.error(
-        "Database and Schema file does not exist, exiting the program.\n(Atleast one of the file is required)"
+        chalk.red(
+          "Database and Schema file does not exist, exiting the program.\n(Atleast one of the file is required.)"
+        )
       );
       process.exit(1);
     }
@@ -29,14 +32,18 @@ export async function initializeDatabase(): Promise<boolean> {
         await db.exec(
           "DELETE FROM sqlite_sequence WHERE name = 'solana_addresses'"
         );
-        console.log(`Database already exists. Cleaned old records`);
+        console.log(
+          chalk.green(`Database already exists. Cleaned old records.`)
+        );
       } else {
         const schemaSQL = fs.readFileSync(SCHEMA_FILE_PATH, "utf-8");
         console.log(
-          `Database exists but does not contain the "solana_addresses" table`
+          chalk.blue(
+            `Database exists but does not contain the "solana_addresses" table.`
+          )
         );
         await db.exec(schemaSQL);
-        console.log(`Schema executed successfully.`);
+        console.log(chalk.green(`Schema executed successfully.`));
       }
 
       await db.close();
@@ -46,12 +53,12 @@ export async function initializeDatabase(): Promise<boolean> {
       console.log("Schema file read sucessfully.");
 
       await db.exec(schemaSQL);
-      console.log("Schema executed successfully.");
+      console.log(chalk.green("Schema executed successfully."));
       await db.close();
       return true;
     }
   } catch (error) {
-    console.error("Error during initializing Database: ", error);
+    console.error(chalk.red("Error during initializing Database: "), error);
     return false;
   }
 }

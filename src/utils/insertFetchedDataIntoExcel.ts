@@ -1,6 +1,7 @@
 import ExcelJS from "exceljs";
 import { XLSX_FILE_PATH } from "../constants/constant.js";
 import { fetchedDataFromApi } from "../models/interfaces.js";
+import chalk from "chalk";
 
 export async function insertFetchedDataIntoExcel(
   data: fetchedDataFromApi[]
@@ -34,10 +35,10 @@ export async function insertFetchedDataIntoExcel(
 
     worksheet.addRows(rows);
     await workBook.xlsx.writeFile(XLSX_FILE_PATH);
-    console.log("All data added");
+
     return true;
   } catch (error) {
-    console.error("Error inserting data into excel sheet: ", error);
+    console.error(chalk.red("Error inserting data into excel sheet: "), error);
     return false;
   }
 }

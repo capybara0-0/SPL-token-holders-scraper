@@ -1,6 +1,7 @@
 import Database from "better-sqlite3";
 import { streamedDataFromDatabase } from "../models/interfaces.js";
 import { DB_FILE_NAME } from "../constants/constant.js";
+import chalk from "chalk";
 
 export const db = new Database(DB_FILE_NAME);
 
@@ -30,6 +31,6 @@ export async function* streamAddressesFromDatabase(
       yield batchedData;
     }
   } catch (error) {
-    console.error("Error streaming addresses:", error);
+    console.error(chalk.red("Error streaming addresses: "), error);
   }
 }

@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import { Database } from "sqlite";
 
 export async function insertAddressIntoDatabase(
@@ -13,7 +14,7 @@ export async function insertAddressIntoDatabase(
     }
     await sqlStatement.finalize();
   } catch (error) {
-    console.error("Error inserting batch: ", error);
+    console.error(chalk.red("Error inserting batch: "), error);
     throw error;
   }
 }
