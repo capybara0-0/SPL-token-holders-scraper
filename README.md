@@ -68,12 +68,9 @@ Follow these steps to set up the project on your local machine:
 
    ```ts
    export const RPC_URI: string = "<your solana api>";
-   export const TARGET_TOKEN_MINT_ADDRESS: string =
-     "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"; // Default: USDC
-   export const SPL_TOKEN_PROGRAM_ID: string =
-     "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA";
+   export const TARGET_TOKEN_MINT_ADDRESS: string = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"; // Default: USDC
+   export const SPL_TOKEN_PROGRAM_ID: string = "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA";
    export const TEXT_FILE_NAME: string = "<your file name>.txt";
-   export const DB_FILE_NAME: string = "solana_addresses.db";
    ```
 
 4. **Prepare Input File**
